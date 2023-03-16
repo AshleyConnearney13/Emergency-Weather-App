@@ -14,7 +14,7 @@ npm install react-native-dropdown-picker
 ```
 
 # Creating your local Git repository and linking it to our remote repository
-1. Create an empty folder, and open up Command Prompt. Change the directory to be inside of this empty folder.
+1. Open Command Prompt and change to the directory you'd like to create the folder that holds the project. Once the prior is done, run `npx create-expo-app emergency-weather-app`. Once done, run `cd weather-app` to move into the folder.
 2. Run `git init` to initialize your local Git repository.
 3. Run `git remote add origin https://github.com/AshleyConnearney13/Emergency-Weather-App.git`. Verify that its connected using `git remote -v`. From now on, the remote repository on GitHub will be called as "origin".
 4. Run `git pull` to pull all the latest information from the remote repository. As of the time this was wwritten, you should see main, master, and dev pop up.
