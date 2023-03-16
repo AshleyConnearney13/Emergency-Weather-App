@@ -3,6 +3,7 @@ Repository for Whelter, an emergency shelter oriented Android application develo
 
 # Required installations
 Note: Make sure to run these commands in the empty folder initially created in step 1 of "Creating your Local Git repository...".
+
 Note 2: To run the program, run `npx expo start` in the Command Prompt within this folder.
 ```
 npx expo install react-native-screens react-native-safe-area-context
