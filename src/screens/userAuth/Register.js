@@ -18,7 +18,7 @@ class Register extends Component {
             phone: '',
             open: false,
             value: null,
-            items: [{label: 'Test', value: 'test'}, {label: 'Test2', value: 'test2'}],
+            items: [{label: 'I am looking for a shelter.', value: '1'}, {label: 'I am, or work for a shelter provider.', value: '2'}],
             accountCreated: false,
         };
 
