@@ -5,7 +5,7 @@ class Account extends Component {
     render() {
         return (
             <View>
-                <Text>test</Text>
+                <Text>Crocodile</Text>
             </View>
         );
     }
