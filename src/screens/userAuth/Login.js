@@ -15,9 +15,12 @@ class Login extends Component {
 
     onLogin() {
         const { username, password } = this.state;
-        //Alert.alert('Credentials', `${username} + ${password}`);
         // Add if statement that checks if login is in database.
-        this.props.navigation.navigate('Home');
+        if( this.state.username === '' || this.state.password === '') {
+            Alert.alert('Error: Field is left blank', `Please fill in all text fields.`);
+        } else {
+            this.props.navigation.navigate('Home', {username: this.state.username});
+        }
     }
     
     render() { 

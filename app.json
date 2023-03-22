@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "testing-app",
-    "slug": "testing-app",
+    "slug": "whelter-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.quinta11.whelterapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB9KnqBHnR1bR5kRsAZ93ytg7s6uhDWzfg"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b83da1fe-1dd7-4880-a4bc-347fe54bef7a"
+      }
+    },
+    "owner": "quinta11"
   }
 }
