@@ -25,9 +25,9 @@ class Account extends Component {
 
                 <View style={styles.textBackground}>
                     <Text style={styles.header}>Shelters near you:</Text>
-                    <Text style={styles.body}>Example 1: 123 Test Lane... (3.8 mi)</Text>
-                    <Text style={styles.body}>Example 2: 456 Test Place... (6.7 mi)</Text>
-                    <Text style={styles.body}>Example 3: 7890 Test Ave... (12.4 mi)</Text>
+                    <Text style={styles.body}>Example 1: 123 Test Lane...   (3.8 mi)</Text>
+                    <Text style={styles.body}>Example 2: 456 Test Place...  (6.7 mi)</Text>
+                    <Text style={styles.body}>Example 3: 7890 Test Ave...   (12.4 mi)</Text>
                 </View>
             </SafeAreaView>
         );
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     body: {
-        fontSize: 20,
+        fontSize: 18,
         lineHeight: 35,
         color: 'black',
         textAlign: 'left',

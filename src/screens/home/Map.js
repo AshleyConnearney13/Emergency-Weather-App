@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button} from 'react-native';
+import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
 import MapView, {Geojson, PROVIDER_GOOGLE} from 'react-native-maps';
 
 class Map extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <MapView
                     style={styles.map}
                     customMapStyle={mapStyle}
@@ -26,7 +26,7 @@ class Map extends Component {
                         fillColor='rgba(52, 52, 52, 0.2)'
                     />
                 </MapView>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -38,6 +38,7 @@ const volusiaCounty = {"type":"FeatureCollection","features":[{"type":"Feature",
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: StatusBar.currentHeight+9,
     },
     map: {
         width: '100%',

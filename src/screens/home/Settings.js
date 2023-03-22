@@ -7,7 +7,7 @@ class Settings extends Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.space}/>
 
-                <Text style={styles.body}>test</Text>
+                <Text style={styles.body}>Placeholder</Text>
             </SafeAreaView>
         );
     }
