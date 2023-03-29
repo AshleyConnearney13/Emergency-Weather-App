@@ -5,7 +5,7 @@ class Info extends Component {
     render() {
         return (
             <View>
-                <Text>test</Text>
+                <Text>Ashley's Page</Text>
             </View>
         );
     }
