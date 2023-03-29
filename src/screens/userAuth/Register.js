@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, StatusBar, SafeAreaView, ScrollView, Alert, Button} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { auth } from '../../../FirebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 class Register extends Component {
     constructor(props) {
@@ -39,14 +41,21 @@ class Register extends Component {
 
     onRegister() {
         const regEmail = RegExp(/^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$/g);
-        const { email, username, password, repeatPassword } = this.state;
+        const { email, password, repeatPassword, firstName, lastName, value} = this.state;
         //Alert.alert('Credentials', `${email} + ${username} + ${password} + ${repeatPassword}`);
-        if (!regEmail.test(email)) {
+        if (email === '' || password === '' || firstName === '' || lastName === '' || value === null) {
+            Alert.alert('Error: An entry is empty.', `Please fill in all required entries.`);
+        }  else if (!regEmail.test(email)) {
             Alert.alert('Error: Email is incorrect', `Please input a valid email address.`);
         } else if (password !== repeatPassword) {
             Alert.alert('Error: Passwords do not match', `Please re-enter password.`);
         } else {
-            Alert.alert('Registration information saved.', `Please re-enter login information.`);
+            createUserWithEmailAndPassword(auth, this.state.email, this.state.password);
+            if (value === 2) {
+                Alert.alert('Registration information saved.', `Please wait for your account to be authenticated before logging in.`);
+            } else {
+                Alert.alert('Registration information saved.', `Please re-enter login information.`);
+            }
             this.props.navigation.navigate('SignIn');
         }
     }
@@ -66,12 +75,6 @@ class Register extends Component {
                         placeholder={'Email Address'}
                         style={styles.input}
                         inputMode='email'
-                    />
-                    <TextInput
-                        value={this.state.username}
-                        onChangeText={(username) => this.setState({ username })}
-                        placeholder={'Username'}
-                        style={styles.input}
                     />
                     <TextInput
                         value={this.state.password}

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button} from 'react-native';
+import { auth } from '../../../FirebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            username: '',
+            email: '',
             password: '',
         };
     }
@@ -14,10 +16,15 @@ class Login extends Component {
     
 
     onLogin() {
-        const { username, password } = this.state;
-        //Alert.alert('Credentials', `${username} + ${password}`);
+        const { email, password } = this.state;
         // Add if statement that checks if login is in database.
-        this.props.navigation.navigate('Home');
+        if( email === '' || password === '') {
+            Alert.alert('Error: Field is left blank', `Please fill in all text fields.`);
+        } else {
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {this.props.navigation.navigate('Home', {email: email});})
+            .catch((error) => {Alert.alert('Error: Account does not exist.', `Please verify you are using the correct account credentials.`)});
+        }
     }
     
     render() { 
@@ -26,9 +33,9 @@ class Login extends Component {
                 <Text style={styles.text}>Whelter</Text>
 
                 <TextInput
-                    value={this.state.username}
-                    onChangeText={(username) => this.setState({ username })}
-                    placeholder={'Username'}
+                    value={this.state.email}
+                    onChangeText={(email) => this.setState({ email })}
+                    placeholder={'Email'}
                     style={styles.input}
                 />
 
