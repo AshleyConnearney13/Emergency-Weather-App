@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, StatusBar, SafeAreaView, ScrollView, Alert, Button} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { auth } from '../../../FirebaseConfig';
+import { auth, db } from '../../../FirebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { ref, set } from 'firebase/database'
 
-class Register extends Component {
+export default class Register extends Component {
     constructor(props) {
         super(props);
         
@@ -17,10 +18,11 @@ class Register extends Component {
             firstName: '',
             lastName: '',
             middleName: '',
-            phone: '',
+            phone: null,
             open: false,
             value: null,
-            items: [{label: 'I am looking for a shelter.', value: '1'}, {label: 'I am, or work for a shelter provider.', value: '2'}],
+            accountType: null,
+            items: [{label: 'I am looking for a shelter.', value: 1}, {label: 'I am, or work for a shelter provider.', value: 2}],
             accountCreated: false,
         };
 
@@ -41,17 +43,27 @@ class Register extends Component {
 
     onRegister() {
         const regEmail = RegExp(/^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$/g);
-        const { email, password, repeatPassword, firstName, lastName, value} = this.state;
+        const { username, email, password, repeatPassword, firstName, middleName, lastName, accountType, phone} = this.state;
         //Alert.alert('Credentials', `${email} + ${username} + ${password} + ${repeatPassword}`);
-        if (email === '' || password === '' || firstName === '' || lastName === '' || value === null) {
+        if (username === '' || email === '' || password === '' || firstName === '' || lastName === '' || accountType === null || phone === null) {
             Alert.alert('Error: An entry is empty.', `Please fill in all required entries.`);
         }  else if (!regEmail.test(email)) {
             Alert.alert('Error: Email is incorrect', `Please input a valid email address.`);
         } else if (password !== repeatPassword) {
             Alert.alert('Error: Passwords do not match', `Please re-enter password.`);
         } else {
-            createUserWithEmailAndPassword(auth, this.state.email, this.state.password);
-            if (value === 2) {
+            set(ref(db, 'Users/' + username + '/'), {
+                accountType: accountType,
+                username: username,
+                email: email,
+                password: password,
+                firstName: firstName,
+                middleName: middleName,
+                lastName: lastName,
+                phone: phone,
+            });
+            createUserWithEmailAndPassword(auth, email, password);
+            if (accountType === 2) {
                 Alert.alert('Registration information saved.', `Please wait for your account to be authenticated before logging in.`);
             } else {
                 Alert.alert('Registration information saved.', `Please re-enter login information.`);
@@ -69,6 +81,14 @@ class Register extends Component {
                     <Text style={styles.headerText}>Create an Account</Text>
                     
                     <Text style={styles.descText}>Account Information</Text>
+                    {/* Username input box */}
+                    <TextInput
+                        value={this.state.username}
+                        onChangeText={(username) => this.setState({ username })}
+                        placeholder={'Username'}
+                        style={styles.input}
+                    />
+                    {/* Email input box */}
                     <TextInput
                         value={this.state.email}
                         onChangeText={(email) => this.setState({ email })}
@@ -76,6 +96,7 @@ class Register extends Component {
                         style={styles.input}
                         inputMode='email'
                     />
+                    {/* Password input box */}
                     <TextInput
                         value={this.state.password}
                         onChangeText={(password) => this.setState({ password })}
@@ -83,6 +104,7 @@ class Register extends Component {
                         secureTextEntry={true}
                         style={styles.input}
                     />
+                    {/* Repeat password input box */}
                     <TextInput
                         value={this.state.repeatPassword}
                         onChangeText={(repeatPassword) => this.setState({ repeatPassword })}
@@ -92,24 +114,28 @@ class Register extends Component {
                     />
 
                     <Text style={styles.descText}>Personal Information</Text>
+                    {/* First name input box */}
                     <TextInput
                         value={this.state.firstName}
                         onChangeText={(firstName) => this.setState({ firstName })}
                         placeholder={'First Name'}
                         style={styles.input}
                     />
+                    {/* Middle name input box */}
                     <TextInput
                         value={this.state.middleName}
                         onChangeText={(middleName) => this.setState({ middleName })}
                         placeholder={'Middle Name (optional)'}
                         style={styles.input}
                     />
+                    {/* Last name input box */}
                     <TextInput
                         value={this.state.lastName}
                         onChangeText={(lastName) => this.setState({ lastName })}
                         placeholder={'Last Name'}
                         style={styles.input}
                     />
+                    {/* Phone input box */}
                     <TextInput
                         value={this.state.phone}
                         onChangeText={(phone) => this.setState({ phone })}
@@ -120,6 +146,7 @@ class Register extends Component {
 
                     
                     <Text style={styles.descText}>Account Type</Text>
+                    {/* Account type dropdown selector */}
                     <DropDownPicker
                         style={styles.input}
                         open={open}
@@ -127,23 +154,27 @@ class Register extends Component {
                         items={items}
                         setOpen={this.setOpen.bind(this)}
                         setValue={this.setValue.bind(this)}
+                        onChangeValue={(accountType) => this.setState({ accountType })}
                         setItems={this.setItems.bind(this)}
                         dropDownDirection="AUTO"
                         bottomOffset={100}
                         listMode='MODAL'
                         modalAnimationType="slide"
                     />
-
+                    
+                    {/* Confirm registration button */}
                     <Button
                         title={'Register Account'}
                         style={styles.input}
                         onPress={this.onRegister.bind(this)}
                     />
                     
+                    {/* Style that adds empty space */}
                     <View
                         style={styles.space}
                     />
 
+                    {/* Go back to login page button */}
                     <Button
                         title={'Go Back'}
                         style={styles.input}
@@ -154,8 +185,6 @@ class Register extends Component {
         );
     }
 }
-
-export default Register;
 
 const styles = StyleSheet.create({
     container: {

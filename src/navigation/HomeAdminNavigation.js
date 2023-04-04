@@ -1,13 +1,13 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Account, Map, Info, Settings, Shelters} from '../screens';
+import {AccountAdmin, Map, Info, Settings, Shelters} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
 
-export default function HomeNavigation({route}) {
-    const {email, firstName, fromScreen } = route.params;
+export default function HomeAdminNavigation({route}) {
+    const {email, firstName } = route.params;
     console.log(Tab);
     return (
         <Tab.Navigator
@@ -33,7 +33,7 @@ export default function HomeNavigation({route}) {
             tabBarInactiveTintColor: 'gray',
             })}
         >
-            <Tab.Screen name="Account" component={Account} initialParams={{firstName: firstName, fromScreen: fromScreen}} options={{headerShown: false}}/>
+            <Tab.Screen name="Account" component={AccountAdmin} initialParams={{firstName: firstName}} options={{headerShown: false}}/>
             <Tab.Screen name="Shelters" component={Shelters} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
             <Tab.Screen name="Info" component={Info} options={{headerShown: false}}/>
