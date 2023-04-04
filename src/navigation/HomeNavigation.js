@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Account, Map, Info, Settings, Shelters} from '../screens';
+import {Account, Map, Settings, Shelters} from '../screens';
+import InfoNavigation from './InfoNavigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +23,7 @@ export default function HomeNavigation({route}) {
                         iconName = focused ? 'ios-home' : 'ios-home-outline';
                     } else if (route.name === 'Map') {
                         iconName = focused ? 'ios-map' : 'ios-map-outline';  
-                    } else if (route.name === 'Info') {
+                    } else if (route.name === 'InfoNavigation') {
                         iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
                     } else if (route.name === 'Settings') {
                         iconName = focused ? 'ios-list' : 'ios-list-outline';
@@ -36,7 +37,7 @@ export default function HomeNavigation({route}) {
             <Tab.Screen name="Account" component={Account} initialParams={{firstName: firstName, fromScreen: fromScreen}} options={{headerShown: false}}/>
             <Tab.Screen name="Shelters" component={Shelters} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
-            <Tab.Screen name="Info" component={Info} options={{headerShown: false}}/>
+            <Tab.Screen name="InfoNavigation" component={InfoNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
