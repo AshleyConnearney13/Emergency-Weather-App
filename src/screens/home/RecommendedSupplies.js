@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
-import { RecommendedSupplies } from '..';
 
 class RecommendedSupplies extends Component {
     render() {
