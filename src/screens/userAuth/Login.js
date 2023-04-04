@@ -64,8 +64,8 @@ export default class Login extends Component {
                 console.error(error);
 
             });
-
-            this.onLogin();
+            
+            setTimeout(this.onLogin, 250);
         }
     }
 
@@ -77,6 +77,7 @@ export default class Login extends Component {
     }
 
     navigateToHome() {
+        console.log('hi');
         if(this.state.accountType === 1) {
             this.props.navigation.navigate('Home', {email: this.state.email, firstName: this.state.firstName, fromScreen: 'SignIn'});
         } else if (this.state.accountType === 2) {

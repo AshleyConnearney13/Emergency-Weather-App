@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 
 export default function HomeNavigation({route}) {
-    const {email, firstName, fromScreen } = route.params;
+    const {email, firstName} = route.params;
     console.log(Tab);
     return (
         <Tab.Navigator
@@ -23,7 +23,7 @@ export default function HomeNavigation({route}) {
                         iconName = focused ? 'ios-home' : 'ios-home-outline';
                     } else if (route.name === 'Map') {
                         iconName = focused ? 'ios-map' : 'ios-map-outline';  
-                    } else if (route.name === 'InfoNavigation') {
+                    } else if (route.name === 'Info') {
                         iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
                     } else if (route.name === 'Settings') {
                         iconName = focused ? 'ios-list' : 'ios-list-outline';
@@ -34,10 +34,10 @@ export default function HomeNavigation({route}) {
             tabBarInactiveTintColor: 'gray',
             })}
         >
-            <Tab.Screen name="Account" component={Account} initialParams={{firstName: firstName, fromScreen: fromScreen}} options={{headerShown: false}}/>
+            <Tab.Screen name="Account" component={Account} initialParams={{firstName: firstName}} options={{headerShown: false}}/>
             <Tab.Screen name="Shelters" component={Shelters} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
-            <Tab.Screen name="InfoNavigation" component={InfoNavigation} options={{headerShown: false}}/>
+            <Tab.Screen name="Info" component={InfoNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
