@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
-import { auth } from '../../../FirebaseConfig';
 
-export default class Account extends Component {
+export default class AccountAdmin extends Component {
     constructor(props) {
         super(props);
     }
-
+    
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -19,7 +18,7 @@ export default class Account extends Component {
                 <View style={styles.space}/>
 
                 <View style={styles.textBackground}>
-                    <Text style={styles.header}>You are in Zone A.</Text>
+                    <Text style={styles.header}>You are a shelter manager.</Text>
                 </View>
 
                 <View style={styles.space}/>
@@ -61,15 +60,6 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         width: '90%',
-    },
-    input: {
-        width: 380,
-        //height: 40,
-        padding: 10,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        alignSelf: 'baseline',       
     },
     space: {
         width: 20,

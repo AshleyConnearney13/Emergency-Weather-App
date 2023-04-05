@@ -1,29 +1,87 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button} from 'react-native';
-import { auth } from '../../../FirebaseConfig';
+import { auth, db } from '../../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { ref, child, get } from 'firebase/database'
 
-class Login extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
         
         this.state = {
             email: '',
             password: '',
+            username: '',
+            firstName: '',
+            accountType: null,
         };
+
+        this.onLogin = this.onLogin.bind(this);
+        this.navigateToHome = this.navigateToHome.bind(this);
     }
 
     
 
-    onLogin() {
-        const { email, password } = this.state;
-        // Add if statement that checks if login is in database.
-        if( email === '' || password === '') {
+    readDatabase() {
+        const dbRef = ref(db);
+        const { username, password, email, accountType } = this.state;
+        
+        if( username === '' || password === '') {
             Alert.alert('Error: Field is left blank', `Please fill in all text fields.`);
         } else {
-            signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {this.props.navigation.navigate('Home', {email: email});})
-            .catch((error) => {Alert.alert('Error: Account does not exist.', `Please verify you are using the correct account credentials.`)});
+            // Grabs corresponding first name from database
+            get(child(dbRef, `Users/${username}/firstName`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    this.setState({ firstName: snapshot.val() })
+                    console.log('firstName obtained from database: ' + this.state.firstName);
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+            
+            // Grabs corresponding email address from database
+            get(child(dbRef, `Users/${username}/email`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    this.setState({ email: snapshot.val() })
+                    console.log('Email obtained from database: ' + this.state.email);
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+            get(child(dbRef, `Users/${username}/accountType`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    this.setState({ accountType: snapshot.val() })
+                    console.log('accountType obtained from database: ' + this.state.accountType);
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+
+            });
+            
+            setTimeout(this.onLogin, 250);
+        }
+    }
+
+    onLogin() {
+        // Error cases and checking if user account exists
+        signInWithEmailAndPassword(auth, this.state.email, this.state.password)
+        .then((userCredential) => {this.navigateToHome();})
+        .catch((error) => {this.navigateToHome();});
+    }
+
+    navigateToHome() {
+        console.log('hi');
+        if(this.state.accountType === 1) {
+            this.props.navigation.navigate('Home', {email: this.state.email, firstName: this.state.firstName, fromScreen: 'SignIn'});
+        } else if (this.state.accountType === 2) {
+            this.props.navigation.navigate('HomeAdmin', {email: this.state.email, firstName: this.state.firstName});
         }
     }
     
@@ -32,13 +90,15 @@ class Login extends Component {
             <View style={styles.container}>
                 <Text style={styles.text}>Whelter</Text>
 
+                {/* Username input box */}
                 <TextInput
-                    value={this.state.email}
-                    onChangeText={(email) => this.setState({ email })}
-                    placeholder={'Email'}
+                    value={this.state.username}
+                    onChangeText={(username) => this.setState({ username })}
+                    placeholder={'Username'}
                     style={styles.input}
                 />
 
+                {/* Password input box */}
                 <TextInput
                     value={this.state.password}
                     onChangeText={(password) => this.setState({ password })}
@@ -47,16 +107,19 @@ class Login extends Component {
                     style={styles.input}
                 />
 
+                {/* Login button */}
                 <Button
                     title={'Login'}
                     style={styles.input}
-                    onPress={this.onLogin.bind(this)}
+                    onPress={this.readDatabase.bind(this)}
                 />
 
+                {/* Style that effectively adds an empty space */}
                 <View
                     style={styles.space}
                 />
-
+                
+                {/* Register button */}
                 <Button
                     title={'Register'}
                     style={styles.input}
@@ -66,8 +129,6 @@ class Login extends Component {
         );
     }
 }
-
-export default Login;
 
 const styles = StyleSheet.create({
     container: {
