@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
 
+// We want this page to have recommended supplies written out in list? With listed sources? 
+
 class RecommendedSupplies extends Component {
     render() {
         return (

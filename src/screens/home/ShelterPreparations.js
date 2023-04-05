@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
 
+// We want this page to bring to the Shelter page? Or do we want it to bring to a bullet list 
+// of things to do prior to signing up for a shelter + things to bring to a shelter + etc. 
+
 class Shelters extends Component {
     render() {
         return (

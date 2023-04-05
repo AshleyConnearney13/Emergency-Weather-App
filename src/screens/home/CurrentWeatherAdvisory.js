@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import Hyperlink from 'react-native-hyperlink';
+
+const App = () => {
+    const onLinkPressed = () => {
+      Linking.openURL('https://forecast.weather.gov/MapClick.php?lat=29.0475&lon=-81.162#.ZC20csLMIYg')
+    };
+}
 
 class CurrentWeatherAdvisory extends Component {
+
+    
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <View style={styles.space}/>
-
-                <Text style={styles.body}>Hellooooo</Text>
-            </SafeAreaView>
+                
+        <Text style={styles.textMsg}>
+        Please click{' '}
+        <Text style={styles.textLink}
+         onPress={() => {
+          Linking.openURL('https://forecast.weather.gov/MapClick.php?lat=29.0475&lon=-81.162#.ZC20csLMIYg')
+         }}>
+        HERE
+        </Text>{' '}
+        to view the current Volusia County weather report.
+         </Text>
+         
+        </SafeAreaView>
         );
+         
     }
 }
 
@@ -45,4 +64,15 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
     },
+    textMsg: {
+        width: 250,
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#212B36',
+        textAlign: 'center',
+      },
+    textLink: {
+        color: '#36B37E',
+        textDecorationLine: 'underline',
+      },
 });
