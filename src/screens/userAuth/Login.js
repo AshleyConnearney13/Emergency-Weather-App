@@ -16,11 +16,10 @@ export default class Login extends Component {
             accountType: null,
         };
 
+        // These are necessary to allow functions to be called from other functions
         this.onLogin = this.onLogin.bind(this);
         this.navigateToHome = this.navigateToHome.bind(this);
     }
-
-    
 
     readDatabase() {
         const dbRef = ref(db);
@@ -53,6 +52,7 @@ export default class Login extends Component {
                 console.error(error);
             });
 
+            // Grabs corrsponding account type from database
             get(child(dbRef, `Users/${username}/accountType`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     this.setState({ accountType: snapshot.val() })
@@ -62,9 +62,9 @@ export default class Login extends Component {
                 }
             }).catch((error) => {
                 console.error(error);
-
             });
             
+            // this.onLogin calls the onLogin() function after being defined in the constructor
             setTimeout(this.onLogin, 250);
         }
     }

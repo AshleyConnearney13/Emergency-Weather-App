@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AccountAdmin, Map, Settings, Shelters} from '../screens';
 import InfoNavigation from './InfoNavigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SheltersAdminNavigation from './SheltersAdminNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,8 +35,8 @@ export default function HomeAdminNavigation({route}) {
             tabBarInactiveTintColor: 'gray',
             })}
         >
-            <Tab.Screen name="Account" component={AccountAdmin} initialParams={{firstName: firstName}} options={{headerShown: false}}/>
-            <Tab.Screen name="Shelters" component={Shelters} options={{headerShown: false}}/>
+            <Tab.Screen name="Account" component={AccountAdmin} initialParams={{firstName: firstName}} listeners={{beforeRemove: (e) => {e.preventDefault();}}} options={{headerShown: false}}/>
+            <Tab.Screen name="Shelters" component={SheltersAdminNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
             <Tab.Screen name="Info" component={InfoNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>

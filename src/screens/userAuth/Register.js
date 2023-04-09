@@ -139,7 +139,7 @@ export default class Register extends Component {
                     <TextInput
                         value={this.state.phone}
                         onChangeText={(phone) => this.setState({ phone })}
-                        placeholder={'Phone Number XXX-XXX-XXXX'}
+                        placeholder={'Phone Number (XXX-XXX-XXXX)'}
                         style={styles.input}
                         inputMode='tel'
                     />
