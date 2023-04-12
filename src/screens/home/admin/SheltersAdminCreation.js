@@ -10,7 +10,6 @@ export default class SheltersAdminCreation extends Component {
         super(props);
         
         this.state = {
-            id: 0,
             email: '',
             isEmail: false,
             phone: null,
@@ -26,6 +25,7 @@ export default class SheltersAdminCreation extends Component {
         };
 
         this.setValue = this.setValue.bind(this);
+        this.createShelterEntry = this.createShelterEntry.bind(this);
     }
 
     setOpen(open) {
@@ -45,6 +45,7 @@ export default class SheltersAdminCreation extends Component {
         const dbRef = ref(db);
         
         const {email, description, capacity, latitude, longitude, name, type, phone} = this.state;
+        let counter = 0;
 
         if (name === '' || email === '' || description === '' || type === '' || capacity === null || latitude === null || longitude === null || phone === null) {
             Alert.alert('Error: An entry is empty.', `Please fill in all required entries.`);
@@ -52,34 +53,32 @@ export default class SheltersAdminCreation extends Component {
             Alert.alert('Error: Email is incorrect', `Please input a valid email address.`);
         } else {
             get(child(dbRef, `Shelters`)).then((snapshot) => {
-                var counter = 0;
-                snapshot.forEach((snapshot) => {
-                    this.setState({id: this.state.id + 1})
-                    //console.log('COUNTER in loop  ' + counter);
-                    
+                let counter = 0;
+                snapshot.forEach((child) => {
+                    counter += 1;
                 });
-                this.setState({id: this.state.id});
-                console.log('COUNTER in get  ' + counter);
-                console.log('ID in get  ' + this.state.id);
-                //this.setState({id: counter});
-                //console.log('ID in get  ' + this.state.id);
+                console.log('Current number of shelters: ' + counter);
+                this.createShelterEntry(counter+1);
             });
-            //console.log('COUNTER  ' + counter);
-            //console.log('ID   ' + );
-
-            set(ref(db, 'Shelters/' + this.state.id + '/'), {
-                description: description,
-                email: email,
-                id: this.state.id,
-                latitude: parseFloat(latitude),
-                longitude: parseFloat(longitude),
-                name: name,
-                phone: parseFloat(phone),
-                type: type,
-            });
-            Alert.alert('Shelter has been registered.', `Please press the refresh button to reload the shelter list.`);
-            this.props.navigation.navigate('SheltersAdmin');
         }
+    }
+
+    createShelterEntry(counter) {
+        const {email, description, capacity, latitude, longitude, name, type, phone } = this.state;
+
+        set(ref(db, 'Shelters/' + counter + '/'), {
+            description: description,
+            capacity: capacity,
+            email: email,
+            id: counter,
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+            name: name,
+            phone: parseFloat(phone),
+            type: type,
+        });
+        Alert.alert('Shelter has been registered.', `Please press the refresh button to reload the shelter list.`);
+        this.props.navigation.navigate('SheltersAdmin');
     }
     
     render() {
