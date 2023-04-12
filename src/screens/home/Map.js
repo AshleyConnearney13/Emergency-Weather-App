@@ -30,13 +30,13 @@ export default class Map extends Component {
                     data.push(child.val())
                 });
                 this.state.markers.push({
-                    id: data[2],
+                    id: data[3],
                     coordinates: {
-                        latitude: data[3],
-                        longitude: data[4],
+                        latitude: data[4],
+                        longitude: data[5],
                     },
-                    name: data[5],
-                    type: data[7],
+                    name: data[6],
+                    type: data[8],
                 })
             });
             this.setState({markers: this.state.markers})
