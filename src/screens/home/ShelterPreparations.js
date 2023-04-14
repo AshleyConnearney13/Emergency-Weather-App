@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import { FlatList } from 'react-native';
 
-// We want this page to bring to the Shelter page? Or do we want it to bring to a bullet list 
 // of things to do prior to signing up for a shelter + things to bring to a shelter + etc. 
+// button to bring shelter screen and add home navigation // copy from log in file register button and .prompts. navation
 
 class Shelters extends Component {
     render() {
-        return (
+        return (    
+            
+            <View style={styles.textBackground}>
+                <View style={styles.space} />
             <SafeAreaView style={styles.container}>
                 <View style={styles.space}/>
 
-                <Text style={styles.body}>Placeholder</Text>
-            </SafeAreaView>
-        );
+                 <Text style={styles.body}>Before arriving at a shelter please go through
+                 the following checklist:</Text>
+                    </SafeAreaView>
+                        <FlatList
+                        data={[
+                         {key: 'Sign up for a shelter near you'},
+                         {key: 'Recieved confirmation from shelter'},
+                         {key: 'Check if the shelter accepts pets if necessary'},
+                         {key: 'Contact emergency contacts and notify them of your location'},
+  
+                    ]}
+                    renderItem={({item}) => <Text style={styles.item}>{'\u2022' + ' '}{item.key}</Text>}
+                  />
+
+                </View>
+              );
     }
 }
 
@@ -47,5 +64,8 @@ const styles = StyleSheet.create({
     space: {
         width: 20,
         height: 20,
+    },
+    item: {
+        fontSize: 15,
     },
 });
