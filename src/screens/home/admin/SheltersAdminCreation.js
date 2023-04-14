@@ -67,8 +67,8 @@ export default class SheltersAdminCreation extends Component {
         const {email, description, capacity, latitude, longitude, name, type, phone } = this.state;
 
         set(ref(db, 'Shelters/' + counter + '/'), {
-            description: description,
             capacity: capacity,
+            description: description,
             email: email,
             id: counter,
             latitude: parseFloat(latitude),
