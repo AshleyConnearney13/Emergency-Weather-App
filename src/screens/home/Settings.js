@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
         flex: 1,
         //alignItems: 'center',
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     textBackground: {
         borderRadius: 20,

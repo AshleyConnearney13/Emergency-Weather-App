@@ -11,6 +11,7 @@ class Info extends Component {
     }
     render() {
         return (
+
             <SafeAreaView style={styles.container}>
                 <View style={styles.space}/>
                 <Button
@@ -47,6 +48,8 @@ const styles = StyleSheet.create({
         flex: 1,
         //alignItems: 'center',
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     textBackground: {
         borderRadius: 20,
