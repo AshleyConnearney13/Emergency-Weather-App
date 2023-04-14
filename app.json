@@ -37,6 +37,14 @@
         "projectId": "b83da1fe-1dd7-4880-a4bc-347fe54bef7a"
       }
     },
-    "owner": "quinta11"
+    "owner": "quinta11",
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ]
+    ],
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
 import { db } from '../../../FirebaseConfig';
 import { ref, child, get } from 'firebase/database'
 import { Card, Icon } from '@rneui/themed';
@@ -10,6 +10,7 @@ export default class Shelters extends Component {
 
         this.state = {
             shelters: [],
+            refreshing: false,
         };
 
         this.createShelterEntries = this.createShelterEntries.bind(this);
@@ -27,9 +28,9 @@ export default class Shelters extends Component {
                     data.push(child.val())
                 });
                 this.state.shelters.push({
-                    description: data[0],
-                    email: data[1],
-                    capacity: data[2],
+                    capacity: data[0],
+                    description: data[1],
+                    email: data[2],
                     id: data[3],
                     coordinates: {
                         latitude: data[4],
@@ -48,14 +49,14 @@ export default class Shelters extends Component {
     createShelterEntries() {
         console.log('i am here');
         return this.state.shelters.map((shelter) =>
-            <Card>
+            <Card key={shelter.id}>
                 <Card.Title>{shelter.name}</Card.Title>
                 <Card.Divider />
                 <Text>
                     Shelter Type: {shelter.type}
                 </Text>
                 <Text>
-                    Shelter Capacity: nothing yet
+                    Shelter Capacity: {shelter.capacity}
                 </Text>
             </Card>
         )
@@ -64,8 +65,15 @@ export default class Shelters extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <ScrollView style={styles.scrollView}>
-                    <Text style={styles.body}>Placeholder</Text>
+                <ScrollView 
+                    style={styles.scrollView}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={() => {this.setState({shelters: []}); this.readShelterData();}}
+                        />
+                    }
+                >
                     {this.createShelterEntries()}
                 </ScrollView>
             </SafeAreaView>
@@ -88,6 +96,11 @@ const styles = StyleSheet.create({
         width: '90%',
         padding: 10,
         backgroundColor: 'rgba(52, 52, 52, 0.1)'
+    },
+    touchable: {
+        backgroundColor: "lightblue",
+        padding: 10,
+        margin: 10
     },
     header: {
         fontSize: 35,
