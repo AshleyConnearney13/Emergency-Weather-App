@@ -4,7 +4,9 @@ import { db } from '../../../FirebaseConfig';
 import { ref, child, get } from 'firebase/database'
 import { Card, Icon } from '@rneui/themed';
 
-export default class Shelters extends Component {
+
+export default class SheltersInfo extends Component {
+    
     constructor(props) {
         super(props);
 
@@ -13,57 +15,46 @@ export default class Shelters extends Component {
             refreshing: false,
         };
 
-        this.createShelterEntries = this.createShelterEntries.bind(this);
         this.readShelterData = this.readShelterData.bind(this);
-        this.readShelterData();
+        this.renderShelter = this.renderShelter.bind(this);
     }
-    
-    readShelterData() {
+
+    UNSAFE_componentWillMount() {
         const dbRef = ref(db);
 
-        get(child(dbRef, `Shelters`)).then((snapshot) => {
+        get(child(dbRef, `Shelters/` + this.props.route.params.id)).then((snapshot) => {
+            let data = [];
             snapshot.forEach((snapshot) => {
-                let data = [];
-                snapshot.forEach((child) => {
-                    data.push(child.val())
-                });
-                this.state.shelters.push({
-                    capacity: data[0],
-                    description: data[1],
-                    email: data[2],
-                    id: data[3],
-                    coordinates: {
-                        latitude: data[4],
-                        longitude: data[5],
-                    },
-                    name: data[6],
-                    phone: data[7],
-                    type: data[8],
-                })
+                data.push(snapshot.val()) 
+            });
+            this.state.shelters.push({
+                capacity: data[0],
+                description: data[1],
+                email: data[2],
+                id: data[3],
+                coordinates: {
+                    latitude: data[4],
+                    longitude: data[5],
+                },
+                name: data[6],
+                phone: data[7],
+                type: data[8],
             });
             this.setState({shelters: this.state.shelters});
             console.log(this.state.shelters);
         });
     }
+    
+    readShelterData() {
+        //const route = this.props;
+        //const {id} = route.params;
+        
+    }
 
-    createShelterEntries() {
-        console.log('i am here');
-        return this.state.shelters.map((shelter) =>
-            <Card key={shelter.id}>
-                <Card.Title>{shelter.name}</Card.Title>
-                <Card.Divider />
-                <Text>
-                    Shelter Type: {shelter.type}
-                </Text>
-                <Text>
-                    Shelter Capacity: {shelter.capacity}
-                </Text>
-                <Button 
-                    title="More info"
-                    onPress={() => this.props.navigation.navigate('SheltersInfo', {id: shelter.id, fromScreen:'Shelters'})}
-                />
-            </Card>
-        )
+    renderShelter() {
+        return this.state.shelters.map((shelter) => {
+            
+        })
     }
 
     render() {
@@ -78,7 +69,7 @@ export default class Shelters extends Component {
                         />
                     }
                 >
-                    {this.createShelterEntries()}
+                    <Text>wleome, {this.state.shelters.name}</Text>
                 </ScrollView>
             </SafeAreaView>
         );

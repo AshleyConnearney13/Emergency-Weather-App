@@ -11,3 +11,4 @@ export {default as SheltersAdminCreation} from './home/admin/SheltersAdminCreati
 export {default as CurrentWeatherAdvisory} from './home/CurrentWeatherAdvisory.js';
 export {default as RecommendedSupplies} from './home/RecommendedSupplies';
 export {default as ShelterPreparations} from './home/ShelterPreparations';
+export {default as SheltersInfo} from './home/SheltersInfo';

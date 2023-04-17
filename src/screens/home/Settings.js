@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
-//import SettingsComponent from '../../components/SettingsComponent';
 
 class Settings extends Component {
     render() {

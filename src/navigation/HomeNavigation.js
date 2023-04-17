@@ -2,6 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Account, Map, Settings, Shelters} from '../screens';
 import InfoNavigation from './InfoNavigation';
+import SheltersNavigation from './SheltersNavigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { db } from '../../FirebaseConfig';
 
@@ -36,7 +37,7 @@ export default function HomeNavigation({route}) {
             })}
         >
             <Tab.Screen name="Account" component={Account} initialParams={{firstName: firstName}} listeners={{beforeRemove: (e) => {e.preventDefault();}}} options={{headerShown: false}}/>
-            <Tab.Screen name="Shelters" component={Shelters} options={{headerShown: false}}/>
+            <Tab.Screen name="Shelters" component={SheltersNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
             <Tab.Screen name="Info" component={InfoNavigation} options={{headerShown: false}}/>
             <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
