@@ -56,8 +56,8 @@ class RecommendedSupplies extends Component {
 
                                 <FlatList
                                 data={[
-                                {key: '1. Take inside items at risk of blowing away'},
-                                {key: '2. Stay away from windows'},
+                                {key: '1. Take items at risk of blowing away inside'},
+                                {key: '2. Cover up windows'},
                                 {key: '3. Trim trees/branches close to your powerlines and home'},
                              ]}
                             renderItem={({item}) => <Text style={styles.item}>{'\u2028' + ' '}{item.key}</Text>}
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     textBackground: {
         borderRadius: 20,
         width: '100%',
-        height: '75%',
+        height: '100%',
         paddingTop: '5%',
         backgroundColor: 'rgba(52, 52, 52, 0.1)',
     },

@@ -1,106 +1,73 @@
-import React, { Component } from 'react';
+
+// NEW CODE BEGINS HERE
+
+import React, { Component } from 'react'; 
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
 
 class Settings extends Component {
-    render() {
-        return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.space}/>
+  constructor(props) {
+      super(props);
+  }
+  render() {
+      return (
+          <SafeAreaView style={styles.container}>
+              <View style={styles.space}/>
+              <Button
+                  title={'Edit Name'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditName')}
+              />
+              
 
-                <Text style={styles.body}>Placeholder</Text>
-            </SafeAreaView>
-        );
-    }
+              <Button
+                  title={'Edit Address'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditAddress')}
+              />
+
+              <Button 
+                  title={'Edit Email Address'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditEmailAddress')}
+              />    
+
+              <Button
+                  title={'Edit Phone Number'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditPhoneNumber')}
+              />
+
+              <Button
+                  title={'Edit Emergency Contact'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditEmergencyContact')}     
+              />
+
+
+              <Button
+                  title={'Log Out'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('LogOut')}
+              />
+
+          </SafeAreaView>
+
+          
+      );
+      
+  }
+  
 }
 
-///////////////////////////////////////////////
-
-/*const Settings = () => {
-  const [email, setEmail] = React.useState(null);
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [sortBy, setSortBy] = React.useState(null);
-
-  const saveSetting = (key, value) => {
-    AsyncStorage.setItem(key, value);
-  };
-
-  const settingsOptions = [
-    {title: 'My Info', subTitle: 'Setup your profile', onPress: () => {}},
-    {title: 'Accounts', subTitle: null, onPress: () => {}},
-    {
-      title: 'Default account for new contacts',
-      subTitle: email,
-      onPress: () => {},
-    },
-    {title: 'Contacts to display', subTitle: 'All contacts', onPress: () => {}},
-    {
-      title: 'Sort by',
-      subTitle: sortBy,
-      onPress: () => {
-        setModalVisible(true);
-      },
-    },
-    {title: 'Name format', subTitle: 'First name first', onPress: () => {}},
-    {title: 'Import', subTitle: null, onPress: () => {}},
-    {title: 'Export', subTitle: null, onPress: () => {}},
-    {title: 'Blocked numbers', subTitle: null, onPress: () => {}},
-    {title: 'About RNContacts', subTitle: null, onPress: () => {}},
-  ];
-
-  const prefArr = [
-    {
-      name: 'First Name',
-      selected: sortBy === 'First Name',
-
-      onPress: () => {
-        saveSetting('sortBy', 'First Name');
-        setSortBy('First Name');
-        setModalVisible(false);
-      },
-    },
-    {
-        name: 'Last Name',
-        selected: sortBy === 'Last Name',
-      onPress: () => {
-        saveSetting('sortBy', 'Last Name');
-        setSortBy('Last Name');
-        setModalVisible(false);
-      },
-    },
-  ];
-
-  const getSettings = async () => {
-    const user = await AsyncStorage.getItem('user');
-    setEmail(JSON.parse(user).email);
-
-    const sortPref = await AsyncStorage.getItem('sortBy');
-    if (sortPref) {
-      setSortBy(sortPref);
-    }
-  };
-  useEffect(() => {
-    getSettings();
-  }, []);
-
-  return (
-    <SettingsComponent
-      modalVisible={modalVisible}
-      setModalVisible={setModalVisible}
-      settingsOptions={settingsOptions}
-      prefArr={prefArr}
-    />
-  );
-};*/
-
 export default Settings;
-/////////////////////////////////////////////////*
-
 
 const styles = StyleSheet.create({
     container:{
         flex: 1,
         //alignItems: 'center',
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     textBackground: {
         borderRadius: 20,

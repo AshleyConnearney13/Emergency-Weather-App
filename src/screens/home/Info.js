@@ -11,6 +11,7 @@ class Info extends Component {
     }
     render() {
         return (
+
             <SafeAreaView style={styles.container}>
                 <View style={styles.space}/>
                 <Button
@@ -31,6 +32,12 @@ class Info extends Component {
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('ShelterPreparations')}
                 />
+
+                <Button
+                    title={'Personal Reminders'}
+                    style={styles.input}
+                    onPress={() => this.props.navigation.navigate('PersonalReminders')}
+                />
             </SafeAreaView>
 
             
@@ -47,6 +54,8 @@ const styles = StyleSheet.create({
         flex: 1,
         //alignItems: 'center',
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     textBackground: {
         borderRadius: 20,
