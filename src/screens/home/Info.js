@@ -32,6 +32,12 @@ class Info extends Component {
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('ShelterPreparations')}
                 />
+
+                <Button
+                    title={'Personal Reminders'}
+                    style={styles.input}
+                    onPress={() => this.props.navigation.navigate('PersonalReminders')}
+                />
             </SafeAreaView>
 
             

@@ -25,11 +25,31 @@ class Settings extends Component {
                   onPress={() => this.props.navigation.navigate('EditAddress')}
               />
 
+              <Button 
+                  title={'Edit Email Address'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditEmailAddress')}
+              />    
+
+              <Button
+                  title={'Edit Phone Number'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditPhoneNumber')}
+              />
+
+              <Button
+                  title={'Edit Emergency Contact'}
+                  style={styles.input}
+                  onPress={() => this.props.navigation.navigate('EditEmergencyContact')}     
+              />
+
+
               <Button
                   title={'Log Out'}
                   style={styles.input}
                   onPress={() => this.props.navigation.navigate('LogOut')}
               />
+
           </SafeAreaView>
 
           

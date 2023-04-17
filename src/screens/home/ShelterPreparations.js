@@ -7,28 +7,30 @@ import { FlatList } from 'react-native';
 
 class Shelters extends Component {
     render() {
-        return (    
-            
-            <View style={styles.textBackground}>
-                <View style={styles.space} />
+        return (  
+
             <SafeAreaView style={styles.container}>
+            <View style={styles.textBackground}>
+            
                 <View style={styles.space}/>
 
                  <Text style={styles.body}>Before arriving at a shelter please go through
                  the following checklist:</Text>
-                    </SafeAreaView>
+                    
                         <FlatList
                         data={[
+                         
                          {key: 'Sign up for a shelter near you'},
-                         {key: 'Recieved confirmation from shelter'},
-                         {key: 'Check if the shelter accepts pets if necessary'},
+                         {key: 'Call shelter for confirmation'},
+                         {key: 'Research if the shelter accepts pets if necessary'},
                          {key: 'Contact emergency contacts and notify them of your location'},
   
                     ]}
                     renderItem={({item}) => <Text style={styles.item}>{'\u2022' + ' '}{item.key}</Text>}
                   />
-
-                </View>
+                  </View>
+                </SafeAreaView>
+                
               );
     }
 }
@@ -39,12 +41,15 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     textBackground: {
         borderRadius: 20,
         width: '90%',
         padding: 10,
         backgroundColor: 'rgba(52, 52, 52, 0.1)'
+        
     },
     header: {
         fontSize: 35,
@@ -56,10 +61,11 @@ const styles = StyleSheet.create({
     },
     body: {
         fontSize: 20,
-        lineHeight: 35,
+        lineHeight: 20,
         color: 'black',
         textAlign: 'left',
         width: '90%',
+       
     },
     space: {
         width: 20,
