@@ -13,3 +13,5 @@ export {default as RecommendedSupplies} from './home/RecommendedSupplies';
 export {default as ShelterPreparations} from './home/ShelterPreparations';
 export {default as SheltersInfo} from './home/SheltersInfo';
 export {default as PersonalReminders} from './home/PersonalReminders';
+export {default as EditContactInfo} from './home/editAccount/EditContactInfo'
+export {default as EditPersonalInfo} from './home/editAccount/EditPersonalInfo'

@@ -74,7 +74,7 @@ export default class Shelters extends Component {
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
-                            //onRefresh={() => {this.setState({shelters: []}); this.readShelterData();}}
+                            onRefresh={() => {this.setState({shelters: []}); this.readShelterData();}}
                         />
                     }
                 >

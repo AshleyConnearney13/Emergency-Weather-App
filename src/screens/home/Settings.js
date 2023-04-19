@@ -1,65 +1,41 @@
-
-// NEW CODE BEGINS HERE
-
 import React, { Component } from 'react'; 
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import { getAuth, signOut } from "firebase/auth";
 
-class Settings extends Component {
-  constructor(props) {
-      super(props);
-  }
-  render() {
-      return (
-          <SafeAreaView style={styles.container}>
-              <View style={styles.space}/>
-              <Button
-                  title={'Edit Name'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('EditName')}
-              />
-              
+export default class Settings extends Component {
+    constructor(props) {
+        super(props);
 
-              <Button
-                  title={'Edit Address'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('EditAddress')}
-              />
+        this.logOutUser = this.logOutUser.bind(this);
+    }
 
-              <Button 
-                  title={'Edit Email Address'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('EditEmailAddress')}
-              />    
+    logOutUser() {
+    }
 
-              <Button
-                  title={'Edit Phone Number'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('EditPhoneNumber')}
-              />
-
-              <Button
-                  title={'Edit Emergency Contact'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('EditEmergencyContact')}     
-              />
-
-
-              <Button
-                  title={'Log Out'}
-                  style={styles.input}
-                  onPress={() => this.props.navigation.navigate('LogOut')}
-              />
-
-          </SafeAreaView>
-
-          
-      );
-      
-  }
-  
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <Button
+                    title={'Edit Personal Info'}
+                    style={styles.input}
+                    onPress={() => this.props.navigation.navigate('EditPersonalInfo')}
+                />
+                <View style={styles.space}/>
+                <Button 
+                    title={'Edit Contact Info'}
+                    style={styles.input}
+                    onPress={() => this.props.navigation.navigate('EditContactInfo')}
+                />
+                <View style={styles.space}/>
+                <Button
+                    title={'Log Out'}
+                    style={styles.input}
+                    onPress={this.logOutUser()}
+                />
+            </SafeAreaView> 
+        );
+    }
 }
-
-export default Settings;
 
 const styles = StyleSheet.create({
     container:{

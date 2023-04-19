@@ -3,33 +3,28 @@ import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert
 //import Hyperlink from 'react-native-hyperlink';
 
 
-class CurrentWeatherAdvisory extends Component {
+export default class CurrentWeatherAdvisory extends Component {
     
     
     render() {
         return (
             <SafeAreaView style={styles.container}>
-            <View style={styles.textBackground}>
-                <Text style={styles.body}>
+                <View style={styles.textBackground}>
+                    <Text style={styles.body}>
                     Please click{' '}
-                    <Text style={styles.textLink}
-                        onPress={() => {
-                            Linking.openURL('https://forecast.weather.gov/MapClick.php?lat=29.0475&lon=-81.162#.ZC20csLMIYg')
-                        }}>
+                        <Text 
+                            style={styles.textLink}
+                            onPress={() => {Linking.openURL('https://weather.gov/mlb/')}}
+                        >
                         HERE
-                    </Text>{' '}
+                        </Text>{' '}
                     to view the current Volusia County weather report.
                     </Text>
                 </View>
             </SafeAreaView>
         );
-
-        
-         
     }
 }
-
-export default CurrentWeatherAdvisory;
 
 const styles = StyleSheet.create({
     container:{

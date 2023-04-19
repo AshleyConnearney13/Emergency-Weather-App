@@ -79,9 +79,9 @@ export default class Login extends Component {
     navigateToHome() {
         console.log('hi');
         if(this.state.accountType === 1) {
-            this.props.navigation.navigate('Home', {email: this.state.email, firstName: this.state.firstName, fromScreen: 'SignIn'});
+            this.props.navigation.navigate('Home', {firstName: this.state.firstName, username: this.state.username});
         } else if (this.state.accountType === 2) {
-            this.props.navigation.navigate('HomeAdmin', {email: this.state.email, firstName: this.state.firstName});
+            this.props.navigation.navigate('HomeAdmin', {firstName: this.state.firstName, username: this.state.username});
         }
     }
     

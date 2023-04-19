@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
-//import Hyperlink from 'react-native-hyperlink'
 
-const supportedURL = 'https://forecast.weather.gov/MapClick.php?CityName=Volusia&state=FL&site=MLB&textField1=29.1683&textField2=-81.5211&e=0#.ZCssIcLMIYg';
-
-
-class Info extends Component {
+export default class Info extends Component {
     constructor(props) {
         super(props);
     }
@@ -13,41 +9,33 @@ class Info extends Component {
         return (
 
             <SafeAreaView style={styles.container}>
-                <View style={styles.space}/>
                 <Button
                     title={'Current Weather Advisory'}
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('CurrentWeatherAdvisory')}
                 />
-                
-
+                <View style={styles.space}/>
                 <Button
                     title={'Recommended Supplies'}
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('RecommendedSupplies')}
                 />
-
+                <View style={styles.space}/>
                 <Button
                     title={'Shelter Preparations'}
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('ShelterPreparations')}
                 />
-
+                <View style={styles.space}/>
                 <Button
                     title={'Personal Reminders'}
                     style={styles.input}
                     onPress={() => this.props.navigation.navigate('PersonalReminders')}
                 />
             </SafeAreaView>
-
-            
         );
-        
     }
-    
 }
-
-export default Info;
 
 const styles = StyleSheet.create({
     container:{
