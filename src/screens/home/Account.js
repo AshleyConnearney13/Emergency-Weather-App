@@ -47,18 +47,17 @@ export default class Account extends Component {
                     </View>
 
                     <View style={styles.space}/>
-
-                    <View style={styles.textBackground}>
-                        <Text style={styles.header}>You are in Zone A.</Text>
-                    </View>
+                    
+                        
+                
 
                     <View style={styles.space}/>
 
                     <View style={styles.textBackground}>
-                        <Text style={styles.header}>Shelters near you:</Text>
-                        <Text style={styles.body}>Example 1: 123 Test Lane...   (3.8 mi)</Text>
-                        <Text style={styles.body}>Example 2: 456 Test Place...  (6.7 mi)</Text>
-                        <Text style={styles.body}>Example 3: 7890 Test Ave...   (12.4 mi)</Text>
+                        <Text style={styles.header}>Shelters previously utilized:</Text>
+                        <Text style={styles.body}>Shelter 1: 123 Test Lane...   (3.8 mi)</Text>
+                        <Text style={styles.body}>Shelter 2: 456 Test Place...  (6.7 mi)</Text>
+                        <Text style={styles.body}>Shelter 3: 7890 Test Ave...   (12.4 mi)</Text>
                     </View>
                 </ScrollView>
             </SafeAreaView>
