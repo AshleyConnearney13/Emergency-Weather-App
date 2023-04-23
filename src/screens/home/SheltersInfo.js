@@ -17,12 +17,15 @@ export default class SheltersInfo extends Component {
 
         this.readShelterData = this.readShelterData.bind(this);
         this.renderShelter = this.renderShelter.bind(this);
+        this.readShelterData();
     }
 
-    UNSAFE_componentWillMount() {
+    readShelterData({route}) {
         const dbRef = ref(db);
+        const ID = route.params;
 
-        get(child(dbRef, `Shelters/` + this.props.route.params.id)).then((snapshot) => {
+
+        get(child(dbRef, `Shelters/` + ID + `/`)).then((snapshot) => {
             let data = [];
             snapshot.forEach((snapshot) => {
                 data.push(snapshot.val()) 
@@ -38,18 +41,17 @@ export default class SheltersInfo extends Component {
                 },
                 name: data[6],
                 phone: data[7],
-                type: data[8],
-            });
+                type: data[8],            });
             this.setState({shelters: this.state.shelters});
             console.log(this.state.shelters);
         });
     }
     
-    readShelterData() {
+    /*readShelterData() {
         //const route = this.props;
         //const {id} = route.params;
         
-    }
+    }*/
 
     renderShelter() {
         return this.state.shelters.map((shelter) => {

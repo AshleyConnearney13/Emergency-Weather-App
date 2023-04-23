@@ -4,7 +4,7 @@ import {Shelters, SheltersInfo} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
-export default function SheltersNavigation() {
+export default function SheltersNavigation({route}) {
     console.log(Stack);
     return (
         <Stack.Navigator initialRouteName="SheltersHome">
