@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, Share, StatusBar} from 'react-native';
-import { db } from '../../../FirebaseConfig';
+import { db } from '../../../../FirebaseConfig';
 import { ref, child, get, update } from 'firebase/database'
 import { Card, Icon } from '@rneui/themed';
 
 
-export default class SheltersInfo extends Component {
+export default class SheltersAdminInfo extends Component {
     
     constructor(props) {
         super(props);
