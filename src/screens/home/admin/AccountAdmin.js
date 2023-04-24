@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar, RefreshControl, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, StatusBar, RefreshControl, ScrollView} from 'react-native';
 import { db } from '../../../../FirebaseConfig'
 import { ref, get, child } from 'firebase/database'
 
@@ -76,12 +76,10 @@ export default class AccountAdmin extends Component {
                     <View style={styles.textBackground}>
                         <Text style={styles.header}>Welcome, {this.state.firstName}.</Text>
                     </View>
-
                     <View style={styles.space}/>
                     <View style={styles.textBackground}>
                         <Text style={styles.header}>You are part of shelter management.</Text>
                     </View>
-
                     <View style={styles.space}/>
                     {this.state.shelters.map((shelter, index) => (
                         <View key={index}>
@@ -100,7 +98,8 @@ export default class AccountAdmin extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        alignItems: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: StatusBar.currentHeight,
     },
     textBackground: {
@@ -124,15 +123,6 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left',
         width: '90%',
-    },
-    input: {
-        width: 380,
-        //height: 40,
-        padding: 10,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        alignSelf: 'baseline',       
     },
     space: {
         width: 20,

@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 export default function LoginNavigation() {
     console.log(Stack);
     return (
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator>
             <Stack.Screen name="SignIn" component={Login} options={{headerShown: false}}/>
             <Stack.Screen name="SignUp" component={Register} options={{headerShown: false}}/>
             <Stack.Screen name="Home" component={HomeNavigation} options={{headerShown: false}}/>

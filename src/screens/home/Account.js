@@ -9,6 +9,8 @@ export default class Account extends Component {
         
         this.state = {
             firstName: '',
+            viewReservation: null,
+            shelters: [],
             refreshing: false
         }
         this.readAccountData = this.readAccountData.bind(this);
@@ -27,6 +29,36 @@ export default class Account extends Component {
         }).catch((error) => {
             console.error(error);
         });
+
+        get(child(dbRef, `Users/${this.props.route.params.username}/viewReservation`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                this.setState({ viewReservation: snapshot.val() })
+                get(child(dbRef, `Shelters/` + this.state.viewReservation)).then((snapshot) => {
+                    let data = [];
+                    snapshot.forEach((snapshot) => {
+                        data.push(snapshot.val()) 
+                    });
+                    this.state.shelters.push({
+                        capacity: data[0],
+                        description: data[1],
+                        email: data[2],
+                        id: data[3],
+                        coordinates: {
+                            latitude: data[4],
+                            longitude: data[5],
+                        },
+                        name: data[6],
+                        phone: data[7],
+                        type: data[8],
+                    });
+                    this.setState({shelters: this.state.shelters});
+                });
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     }
 
     render() {
@@ -36,29 +68,27 @@ export default class Account extends Component {
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
-                            onRefresh={() => {this.setState({firstName: ''}); this.readAccountData();}}
+                            onRefresh={() => {this.setState({firstName: ''}); this.setState({shelters: []}); this.readAccountData();}}
                         />
                     }
                 >
                     <View style={styles.space}/>
-                    
                     <View style={styles.textBackground}>
                         <Text style={styles.header}>Welcome, {this.state.firstName}.</Text>
                     </View>
-
                     <View style={styles.space}/>
-                    
-                        
-                
-
-                    <View style={styles.space}/>
-
                     <View style={styles.textBackground}>
-                        <Text style={styles.header}>Shelters previously utilized:</Text>
-                        <Text style={styles.body}>Shelter 1: 123 Test Lane...   (3.8 mi)</Text>
-                        <Text style={styles.body}>Shelter 2: 456 Test Place...  (6.7 mi)</Text>
-                        <Text style={styles.body}>Shelter 3: 7890 Test Ave...   (12.4 mi)</Text>
+                        <Text style={styles.header}>You are a general user.</Text>
                     </View>
+                    <View style={styles.space}/>
+                    {this.state.shelters.map((shelter, index) => (
+                        <View key={index}>
+                            <View style={styles.textBackground}>
+                                <Text style={styles.header}>Shelter reservation at:</Text>
+                                <Text style={styles.body}>{shelter.name}</Text>
+                            </View>
+                        </View>
+                    ))}
                 </ScrollView>
             </SafeAreaView>
         );

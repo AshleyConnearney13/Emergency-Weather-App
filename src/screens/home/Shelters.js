@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, ScrollView, RefreshControl, Button, StatusBar} from 'react-native';
 import { db } from '../../../FirebaseConfig';
 import { ref, child, get } from 'firebase/database'
-import { Card, Icon } from '@rneui/themed';
+import { Card } from '@rneui/themed';
 
 export default class Shelters extends Component {
     constructor(props) {
@@ -47,17 +47,12 @@ export default class Shelters extends Component {
     }
 
     createShelterEntries() {
-        console.log('i am here');
         return this.state.shelters.map((shelter) =>
             <Card key={shelter.id}>
                 <Card.Title>{shelter.name}</Card.Title>
                 <Card.Divider />
-                <Text>
-                    Shelter Type: {shelter.type}
-                </Text>
-                <Text>
-                    Shelter Capacity: {shelter.capacity}
-                </Text>
+                <Text>Shelter Type: {shelter.type}</Text>
+                <Text>Shelter Capacity: {shelter.capacity}</Text>
                 <View style={styles.space} />
                 <Button 
                     title="More info"
@@ -70,8 +65,7 @@ export default class Shelters extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <ScrollView 
-                    style={styles.scrollView}
+                <ScrollView
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -79,6 +73,7 @@ export default class Shelters extends Component {
                         />
                     }
                 >
+                    <View style={styles.space} />
                     {this.createShelterEntries()}
                 </ScrollView>
             </SafeAreaView>
@@ -90,37 +85,6 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-    },
-    scrollView: {
-        marginTop: 50,
-        marginLeft: 10,
-        marginRight: 10,
-    },
-    textBackground: {
-        borderRadius: 20,
-        width: '90%',
-        padding: 10,
-        backgroundColor: 'rgba(52, 52, 52, 0.1)'
-    },
-    touchable: {
-        backgroundColor: "lightblue",
-        padding: 10,
-        margin: 10
-    },
-    header: {
-        fontSize: 35,
-        lineHeight: 50,
-        color: 'black',
-        fontWeight: 'bold',
-        textAlign: 'left',
-        width: '90%',
-    },
-    body: {
-        fontSize: 20,
-        lineHeight: 35,
-        color: 'black',
-        textAlign: 'left',
-        width: '90%',
     },
     space: {
         width: 20,

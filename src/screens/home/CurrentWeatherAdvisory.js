@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button, StatusBar, Linking} from 'react-native';
-//import Hyperlink from 'react-native-hyperlink';
-
+import {StyleSheet, Text, View, SafeAreaView, Button, StatusBar, Linking} from 'react-native';
 
 export default class CurrentWeatherAdvisory extends Component {
-    
-    
     render() {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.textBackground}>
-                    <Text style={styles.body}>
-                    Please click{' '}
-                        <Text 
-                            style={styles.textLink}
-                            onPress={() => {Linking.openURL('https://weather.gov/mlb/')}}
-                        >
-                        HERE
-                        </Text>{' '}
-                    to view the current Volusia County weather report.
+                    <Text style={styles.header}>
+                        Please click{' '}
+                            <Text style={styles.textLink} onPress={() => {Linking.openURL('https://weather.gov/mlb/')}}>
+                                HERE
+                            </Text>{' '}
+                        to view the current Volusia County weather report.
                     </Text>
                 </View>
+                <View style={styles.space}/>
+                <Button
+                    title={'Go Back'}
+                    onPress={() => this.props.navigation.navigate('InfoHome')}
+                />
             </SafeAreaView>
         );
     }
@@ -47,26 +45,12 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         width: '90%',
     },
-    body: {
-        fontSize: 20,
-        lineHeight: 35,
-        color: 'black',
-        textAlign: 'center',
-        width: '90%',
-    },
     space: {
         width: 20,
         height: 20,
     },
-    textMsg: {
-        width: 250,
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#212B36',
-        textAlign: 'center',
-      },
     textLink: {
         color: '#36B37E',
         textDecorationLine: 'underline',
-      },
+    },
 });

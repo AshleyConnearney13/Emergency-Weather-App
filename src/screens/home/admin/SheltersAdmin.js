@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, ScrollView, RefreshControl, Button, StatusBar} from 'react-native';
 import { db } from '../../../../FirebaseConfig';
 import { ref, child, get } from 'firebase/database'
-import { Card, Icon } from '@rneui/themed';
+import { Card } from '@rneui/themed';
 
 export default class SheltersAdmin extends Component {
     constructor(props) {
@@ -58,16 +58,13 @@ export default class SheltersAdmin extends Component {
             <Card key={shelter.id}>
                 <Card.Title>{shelter.name}</Card.Title>
                 <Card.Divider />
-                <Text>
-                    Shelter Type: {shelter.type}
-                </Text>
-                <Text>
-                    Shelter Capacity: {shelter.capacity}
-                </Text>
+                <Text>Internal ID: {shelter.id}</Text>
+                <Text>Shelter Type: {shelter.type}</Text>
+                <Text>Shelter Capacity: {shelter.capacity}</Text>
                 <View style={styles.space} />
                 <Button 
                     title="See reservations"
-                    onPress={() => this.props.navigation.navigate('SheltersAdminInfo', {id: shelter.id, fromScreen:'SheltersHome'})}
+                    onPress={() => this.props.navigation.navigate('SheltersAdminInfo', {id: shelter.id, shelterName: shelter.name, fromScreen:'SheltersHome'})}
                 />
             </Card>
         )
@@ -76,8 +73,7 @@ export default class SheltersAdmin extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <ScrollView 
-                    style={styles.scrollView}
+                <ScrollView
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -86,12 +82,12 @@ export default class SheltersAdmin extends Component {
                     }
                 >
                     <View style={styles.space} />
+                    {this.createShelterEntries()}
+                    <View style={styles.space} />
                     <Button
                         title={'Create a Shelter'}
-                        style={styles.input}
-                        onPress={() => this.props.navigation.navigate('SheltersAdminCreation')}
+                        onPress={() => this.props.navigation.navigate('SheltersAdminCreation', {username: this.props.route.params.username})}
                     />
-                    {this.createShelterEntries()}
                 </ScrollView>
             </SafeAreaView>
         );
@@ -102,36 +98,6 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-    },
-    textBackground: {
-        borderRadius: 20,
-        width: '90%',
-        padding: 10,
-        backgroundColor: 'rgba(52, 52, 52, 0.1)'
-    },
-    header: {
-        fontSize: 35,
-        lineHeight: 50,
-        color: 'black',
-        fontWeight: 'bold',
-        textAlign: 'left',
-        width: '90%',
-    },
-    body: {
-        fontSize: 20,
-        lineHeight: 35,
-        color: 'black',
-        textAlign: 'left',
-        width: '90%',
-    },
-    input: {
-        width: 380,
-        //height: 40,
-        padding: 10,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        alignSelf: 'baseline',       
     },
     space: {
         width: 20,

@@ -44,7 +44,6 @@ export default class Register extends Component {
     onRegister() {
         const regEmail = RegExp(/^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$/g);
         const { username, email, password, repeatPassword, firstName, middleName, lastName, accountType, phone} = this.state;
-        //Alert.alert('Credentials', `${email} + ${username} + ${password} + ${repeatPassword}`);
         if (username === '' || email === '' || password === '' || firstName === '' || lastName === '' || accountType === null || phone === null) {
             Alert.alert('Error: An entry is empty.', `Please fill in all required entries.`);
         }  else if (!regEmail.test(email)) {
@@ -200,7 +199,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: 380,
-        //height: 40,
         padding: 10,
         marginBottom: 10,
         borderWidth: 1,

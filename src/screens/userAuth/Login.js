@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, TouchableOpacity, Alert, Button} from 'react-native';
+import {StyleSheet, Text, View, TextInput, Alert, Button} from 'react-native';
 import { auth, db } from '../../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { ref, child, get } from 'firebase/database'
@@ -88,7 +88,7 @@ export default class Login extends Component {
     render() { 
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>Whelter</Text>
+                <Text style={styles.text}>Emergency Weather App</Text>
 
                 {/* Username input box */}
                 <TextInput

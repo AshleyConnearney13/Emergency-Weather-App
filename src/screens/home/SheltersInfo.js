@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, Share, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, ScrollView, RefreshControl, Alert, Button, Share, StatusBar} from 'react-native';
 import { db } from '../../../FirebaseConfig';
 import { ref, child, get, update } from 'firebase/database'
-import { Card, Icon } from '@rneui/themed';
 
 
 export default class SheltersInfo extends Component {
@@ -53,6 +52,12 @@ export default class SheltersInfo extends Component {
         if (shelter.type === 'GP') {
             type = 'General Population'
         }
+        if (shelter.type === 'PPS') {
+            type = 'People and Pets'
+        }
+        if (shelter.type === 'SpNS') {
+            type = 'Special Needs'
+        }
         return (
             <View>
                 <Text style={styles.body}>Shelter type: {type}</Text>
@@ -61,7 +66,6 @@ export default class SheltersInfo extends Component {
     }
 
     reserveShelter(shelter) {
-        const saveUser = this.props.route.params.username
         const onReserve = async () => {
             try {
                 console.log(this.props.route.params.username)
@@ -109,8 +113,7 @@ export default class SheltersInfo extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <ScrollView 
-                    style={styles.scrollView}
+                <ScrollView
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -118,6 +121,7 @@ export default class SheltersInfo extends Component {
                         />
                     }
                 >
+                    <View style={styles.space}/>
                     {this.state.shelters.map((shelter, index) => (
                         <View key={index}>
                             <View style={styles.textBackground}>
@@ -142,6 +146,11 @@ export default class SheltersInfo extends Component {
                             {this.shareShelter(shelter)}
                         </View>
                     ))}
+                    <View style={styles.space} />
+                    <Button
+                        onPress={() => this.props.navigation.navigate('SheltersHome')}
+                        title="Go Back" 
+                    />
                 </ScrollView>
             </SafeAreaView>
         );
@@ -152,9 +161,10 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     scrollView: {
-        marginTop: 50,
         marginLeft: 10,
         marginRight: 10,
     },
@@ -162,12 +172,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: '90%',
         padding: 10,
+        alignSelf: 'center',
         backgroundColor: 'rgba(52, 52, 52, 0.1)'
-    },
-    touchable: {
-        backgroundColor: "lightblue",
-        padding: 10,
-        margin: 10
     },
     header: {
         fontSize: 45,

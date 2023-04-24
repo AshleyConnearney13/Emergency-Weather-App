@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TextInput, StatusBar, SafeAreaView, ScrollView, 
 import DropDownPicker from 'react-native-dropdown-picker';
 import { db } from '../../../../FirebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ref, set, get, child } from 'firebase/database'
+import { ref, set, get, child, update } from 'firebase/database'
 
 export default class SheltersAdminCreation extends Component {
     constructor(props) {
@@ -67,7 +67,7 @@ export default class SheltersAdminCreation extends Component {
         const {email, description, capacity, latitude, longitude, name, type, phone } = this.state;
 
         set(ref(db, 'Shelters/' + counter + '/'), {
-            capacity: capacity,
+            capacity: parseInt(capacity),
             description: description,
             email: email,
             id: counter,
@@ -76,6 +76,10 @@ export default class SheltersAdminCreation extends Component {
             name: name,
             phone: parseFloat(phone),
             type: type,
+        });
+
+        update(ref(db, 'Users/' + this.props.route.params.username), {
+            viewShelter: counter,
         });
         Alert.alert('Shelter has been registered.', `Please press the refresh button to reload the shelter list.`);
         this.props.navigation.navigate('SheltersAdmin');
