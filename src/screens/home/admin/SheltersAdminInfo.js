@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, TextInput, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity, Alert, Button, Share, StatusBar} from 'react-native';
-import { db } from '../../../FirebaseConfig';
+import { db } from '../../../../FirebaseConfig';
 import { ref, child, get, update } from 'firebase/database'
 import { Card, Icon } from '@rneui/themed';
 
 
-export default class SheltersInfo extends Component {
+export default class SheltersAdminInfo extends Component {
     
     constructor(props) {
         super(props);
@@ -16,15 +16,16 @@ export default class SheltersInfo extends Component {
         };
 
         this.readShelterData = this.readShelterData.bind(this);
-        this.renderShelter = this.renderShelter.bind(this);
+        this.renderShelterType = this.renderShelterType.bind(this);
+        this.shareShelter = this.shareShelter.bind(this);
+        this.reserveShelter = this.reserveShelter.bind(this);
+        this.readShelterData();
     }
 
-    UNSAFE_componentWillMount() {
+    readShelterData() {
         const dbRef = ref(db);
-        const ID = route.params;
 
-
-        get(child(dbRef, `Shelters/` + ID + `/`)).then((snapshot) => {
+        get(child(dbRef, `Shelters/` + this.props.route.params.id)).then((snapshot) => {
             let data = [];
             snapshot.forEach((snapshot) => {
                 data.push(snapshot.val()) 
@@ -40,16 +41,23 @@ export default class SheltersInfo extends Component {
                 },
                 name: data[6],
                 phone: data[7],
-                type: data[8],            });
+                type: data[8],
+            });
             this.setState({shelters: this.state.shelters});
             console.log(this.state.shelters);
         });
     }
-    
-    readShelterData() {
-        //const route = this.props;
-        //const {id} = route.params;
-        
+
+    renderShelterType(shelter) {
+        let type = '';
+        if (shelter.type === 'GP') {
+            type = 'General Population'
+        }
+        return (
+            <View>
+                <Text style={styles.body}>Shelter type: {type}</Text>
+            </View>
+        )
     }
 
     reserveShelter(shelter) {

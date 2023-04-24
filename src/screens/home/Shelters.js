@@ -58,9 +58,10 @@ export default class Shelters extends Component {
                 <Text>
                     Shelter Capacity: {shelter.capacity}
                 </Text>
+                <View style={styles.space} />
                 <Button 
                     title="More info"
-                    onPress={() => this.props.navigation.navigate('SheltersInfo', {id: shelter.id, fromScreen:'Shelters'})}
+                    onPress={() => this.props.navigation.navigate('SheltersInfo', {id: shelter.id, fromScreen:'SheltersHome'})}
                 />
             </Card>
         )
@@ -123,6 +124,6 @@ const styles = StyleSheet.create({
     },
     space: {
         width: 20,
-        height: 20,
+        height: 10,
     },
 });

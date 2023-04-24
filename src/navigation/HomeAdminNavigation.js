@@ -1,15 +1,16 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {AccountAdmin, Map, Settings, Shelters} from '../screens';
+import {AccountAdmin, Map} from '../screens';
 import InfoNavigation from './InfoNavigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SheltersAdminNavigation from './SheltersAdminNavigation';
+import SettingsNavigation from './SettingsNavigation';
 
 const Tab = createBottomTabNavigator();
 
 
 export default function HomeAdminNavigation({route}) {
-    const {email, firstName } = route.params;
+    const {username} = route.params;
     console.log(Tab);
     return (
         <Tab.Navigator
@@ -35,11 +36,11 @@ export default function HomeAdminNavigation({route}) {
             tabBarInactiveTintColor: 'gray',
             })}
         >
-            <Tab.Screen name="Account" component={AccountAdmin} initialParams={{firstName: firstName}} listeners={{beforeRemove: (e) => {e.preventDefault();}}} options={{headerShown: false}}/>
-            <Tab.Screen name="Shelters" component={SheltersAdminNavigation} options={{headerShown: false}}/>
+            <Tab.Screen name="Account" component={AccountAdmin} initialParams={{username: username}} listeners={{beforeRemove: (e) => {e.preventDefault();}}} options={{headerShown: false}}/>
+            <Tab.Screen name="Shelters" component={SheltersAdminNavigation} initialParams={{username: username}} options={{headerShown: false}}/>
             <Tab.Screen name="Map" component={Map} options={{headerShown: false}}/>
             <Tab.Screen name="Info" component={InfoNavigation} options={{headerShown: false}}/>
-            <Tab.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
+            <Tab.Screen name="Settings" component={SettingsNavigation} initialParams={{username: username}} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
 }
